@@ -1,0 +1,193 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbqgny366lwic"]
+
+[ext_resource type="Script" path="res://color_gen.gd" id="1_h674o"]
+[ext_resource type="PackedScene" uid="uid://bgdut2bhabvcl" path="res://color_point.tscn" id="2_362bx"]
+[ext_resource type="PackedScene" uid="uid://bq6utbjhn6nv4" path="res://point.tscn" id="3_ee17l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l1drt"]
+
+[sub_resource type="Gradient" id="Gradient_6cdqa"]
+colors = PackedColorArray(0, 1, 0.666667, 1, 0, 0.983334, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nhq8j"]
+gradient = SubResource("Gradient_6cdqa")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7msrb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtpr4"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.329158, 0.329158, 0.329158, 1)
+
+[node name="ColorGen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h674o")
+color_point_scene = ExtResource("2_362bx")
+color_point_marker = ExtResource("3_ee17l")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l1drt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureButton" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+texture_normal = SubResource("GradientTexture1D_nhq8j")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/TextureRect"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("PlaceholderTexture2D_7msrb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScreenResCombo" type="SpinBox" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 4096.0
+value = 1024.0
+rounded = true
+suffix = "px"
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Interp."
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InterpModeOption" type="OptionButton" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "Constant"
+popup/item_1/id = 1
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Colors"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ColorPointCont" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="ColorPoint" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer2/ScrollContainer/ColorPointCont" instance=ExtResource("2_362bx")]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Mirror" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qtpr4")
+text = "Mirror"
+
+[node name="SaveDialogueButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qtpr4")
+text = "Save as Image"
+
+[node name="FileDialog" type="FileDialog" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SaveDialogueButton"]
+unique_name_in_owner = true
+title = "Save as PNG"
+size = Vector2i(429, 159)
+ok_button_text = "Save"
+access = 2
+filters = PackedStringArray("*.png")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ColorPicker" type="ColorPicker" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+picker_shape = 1
+can_add_swatches = false
+presets_visible = false
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/TextureRect" to="." method="_on_texture_rect_pressed"]
+[connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ScreenResCombo" to="." method="_on_screen_res_combo_value_changed"]
+[connection signal="item_selected" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/InterpModeOption" to="." method="_on_interp_mode_option_item_selected"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/Mirror" to="." method="_on_mirror_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SaveDialogueButton" to="." method="_on_save_dialogue_button_pressed"]
+[connection signal="file_selected" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SaveDialogueButton/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="color_changed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/ColorPicker" to="." method="_on_color_picker_color_changed"]

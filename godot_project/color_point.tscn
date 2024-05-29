@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgdut2bhabvcl"]
+
+[ext_resource type="Script" path="res://color_point.gd" id="1_ik10t"]
+[ext_resource type="Texture2D" uid="uid://bf4fch1rr55qy" path="res://trash.png" id="2_rt3s8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o80kv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eguvo"]
+content_margin_left = 5.0
+
+[node name="ColorPoint" type="Button"]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 256.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_type_variation = &"FlatButton"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o80kv")
+script = ExtResource("1_ik10t")
+
+[node name="SelectedBackground" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 256.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TrashButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("2_rt3s8")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eguvo")
+text = "Point 0"
+
+[node name="PointPosSpinBox" type="SpinBox" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+max_value = 1.0
+step = 0.1
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/TrashButton" to="." method="_on_trash_button_pressed"]
+[connection signal="value_changed" from="HBoxContainer/PointPosSpinBox" to="." method="_on_point_pos_spin_box_value_changed"]
