@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbqgny366lwic"]
+[gd_scene load_steps=10 format=3 uid="uid://cbqgny366lwic"]
 
 [ext_resource type="Script" path="res://color_gen.gd" id="1_h674o"]
 [ext_resource type="PackedScene" uid="uid://bgdut2bhabvcl" path="res://color_point.tscn" id="2_362bx"]
@@ -20,6 +20,18 @@ content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0.329158, 0.329158, 0.329158, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_83esh"]
+bg_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ColorGen" type="Control"]
 layout_mode = 3
@@ -63,6 +75,7 @@ theme_override_constants/separation = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 texture_normal = SubResource("GradientTexture1D_nhq8j")
 stretch_mode = 0
 
@@ -170,6 +183,18 @@ filters = PackedStringArray("*.png")
 show_hidden_files = true
 use_native_dialog = true
 
+[node name="HelpButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qtpr4")
+toggle_mode = true
+text = "?"
+
+[node name="CopyrightButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_qtpr4")
+toggle_mode = true
+text = "©"
+
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -180,9 +205,99 @@ layout_mode = 2
 [node name="ColorPicker" type="ColorPicker" parent="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 picker_shape = 1
 can_add_swatches = false
 presets_visible = false
+
+[node name="Help" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -189.0
+offset_right = 261.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_83esh")
+
+[node name="Label" type="Label" parent="Help"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.5
+offset_top = -63.5
+offset_right = 254.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Add Points by clicking Color bar at top left.
+Drag Points to change it's position, or use combo box to change it.
+Delete Points by clicking Red Trashcan icon.
+Select point from list, then pick color to change it's color.
+Press Mirror button to mirror points horizontally."
+
+[node name="License" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -265.0
+offset_top = -467.0
+offset_right = 261.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_83esh")
+
+[node name="Label" type="Label" parent="License"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -254.5
+offset_top = -63.5
+offset_right = 254.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "MIT License
+
+Copyright (c) 2024 jupiterbjy
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the \"Software\"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/TextureRect" to="." method="_on_texture_rect_pressed"]
 [connection signal="value_changed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/ScreenResCombo" to="." method="_on_screen_res_combo_value_changed"]
@@ -190,4 +305,6 @@ presets_visible = false
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/Mirror" to="." method="_on_mirror_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SaveDialogueButton" to="." method="_on_save_dialogue_button_pressed"]
 [connection signal="file_selected" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/SaveDialogueButton/FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/HelpButton" to="." method="_on_help_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer3/CopyrightButton" to="." method="_on_copyright_button_toggled"]
 [connection signal="color_changed" from="PanelContainer/MarginContainer/HBoxContainer/PanelContainer2/ColorPicker" to="." method="_on_color_picker_color_changed"]

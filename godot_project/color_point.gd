@@ -1,5 +1,6 @@
 class_name ColorPoint extends Button
 
+
 signal clicked_idx(point: ColorPoint)
 signal pos_changed(idx: int, value: float)
 signal del_requested(idx: int)
@@ -25,7 +26,6 @@ func setup(idx_: int, pos_: float, color: Color) -> void:
 func set_pos(pos: float) -> void:
 	self.pos = pos
 	self.point_spin.value = pos
-	pos_changed.emit(self)
 
 
 func set_color(color: Color) -> void:
@@ -52,10 +52,6 @@ func unhighlight() -> void:
 func _on_pressed():
 	# Emit another signal just to add idx, kinda feel off but can't help
 	clicked_idx.emit(self)
-
-
-func _on_button_pressed():
-	pass # Replace with function body.
 
 
 func _on_point_pos_spin_box_value_changed(value):

@@ -33,8 +33,10 @@ func clear_points() -> void:
 
 
 ## Add marker on texture. Range is 0.0~1.0.
-func add_marker(relative_pos: float) -> void:
+func add_marker(color_point: ColorPoint, relative_pos: float) -> void:
 	var new_marker: Control = color_point_marker.instantiate()
+	new_marker.associated_color_point = color_point
+	
 	texture_rect.add_child(new_marker)
 	new_marker.position.x = texture_rect.size.x * relative_pos
 
@@ -54,7 +56,7 @@ func list_points() -> void:
 		new_node.pos_changed.connect(_on_pos_changed)
 		
 		# add marker
-		add_marker(grad.get_offset(idx))
+		add_marker(new_node, grad.get_offset(idx))
 
 
 ## Select first point
@@ -158,3 +160,11 @@ func _on_texture_rect_pressed():
 	
 	self.grad.add_point(pos, grad.sample(pos))
 	reload_points()
+
+
+func _on_help_button_toggled(toggled_on):
+	%Help.visible = toggled_on
+
+
+func _on_copyright_button_toggled(toggled_on):
+	%License.visible = toggled_on
